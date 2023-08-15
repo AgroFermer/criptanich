@@ -16,8 +16,8 @@ ADMIN2_ID = 402152266
 
 # Bot 1 logic
 async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
-    msg = f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+D5hnRaAQ-eNjZDIy"
-    button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+D5hnRaAQ-eNjZDIy', disable_web_page_preview=True)
+    msg = f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+4uMnS-VXsvg3M2Yy"
+    button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+4uMnS-VXsvg3M2Yy', disable_web_page_preview=True)
     markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
     await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
