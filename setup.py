@@ -30,8 +30,6 @@ async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
 
     await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
 
-   await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
-
 async def start():
     logging.basicConfig(level=logging.DEBUG,
                            format="%(asctime)s - [%(levelname)s] - %(name)s -"
