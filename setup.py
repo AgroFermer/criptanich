@@ -4,35 +4,60 @@ from aiogram.types import ChatJoinRequest, InlineKeyboardButton, InlineKeyboardM
 from aiogram import Bot, Dispatcher, F
 import logging
 
+# Bot 1 configuration
+BOT1_TOKEN = '6650193766:AAEwpV6IxUDbd2EM9bt7_YnwW9RQwrtRnnw'
+CHANNEL1_ID = -1001517472508
+ADMIN1_ID = 430692329
 
-BOT_TOKEN = '6250154933:AAGiuVuTLqPcXM8bx1vJRM2BK2XShmEXPcc' 
-CHANNEL_ID = -1001930889668
-ADMIN_ID = 5807279918
-async def approve_request (chat_join: ChatJoinRequest, bot: Bot):
-   msg= f"Your request has been approved!\n\nJoin our channel:\nhttps://t.me/channel_name"
-   button = InlineKeyboardButton(text='ВСТУПИТЬ', url='https://example.com', disable_web_page_preview=True)   
+# Bot 2 configuration
+BOT2_TOKEN = '6350360716:AAEczkv6PbrUijqGGXRO80S-kQrQUeXngkU'
+CHANNEL2_ID = -1001913564875
+ADMIN2_ID = 402152266
+
+# Bot 1 logic
+async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
+    msg= f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+D5hnRaAQ-eNjZDIy"
+   button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+D5hnRaAQ-eNjZDIy', disable_web_page_preview=True)   
    markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
 
-   await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup)
-   await chat_join.approve()
+   await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
+
+# Bot 2 logic
+async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
+    msg= f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+l9iBMS9szbRmMWRi"
+   button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+l9iBMS9szbRmMWRi', disable_web_page_preview=True)   
+   markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
+
+
+   await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
 
 async def start():
     logging.basicConfig(level=logging.DEBUG,
                            format="%(asctime)s - [%(levelname)s] - %(name)s -"
-                           "(%(filename)s.%(funcName)s(%(lineo)d) - %(message)s"
+                           "(%(filename)s.%(funcName)s(%(lineno)d) - %(message)s"
                         )
-    bot: Bot = Bot(token=BOT_TOKEN)
-    dp = Dispatcher ()
-    dp.chat_join_request.register (approve_request, F.chat.id ==CHANNEL_ID)
+    bot1 = Bot(token=BOT1_TOKEN)
+    bot2 = Bot(token=BOT2_TOKEN)
+    
+    dp1 = Dispatcher()
+    dp2 = Dispatcher()
+
+    dp1.chat_join_request.register(approve_request_bot1, F.chat.id == CHANNEL1_ID)
+    dp2.chat_join_request.register(approve_request_bot2, F.chat.id == CHANNEL2_ID)
 
     try:
-     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+        await asyncio.gather(
+            dp1.start_polling(bot1, allowed_updates=dp1.resolve_used_update_types()),
+            dp2.start_polling(bot2, allowed_updates=dp2.resolve_used_update_types())
+        )
     except Exception as ex:
-     logging.error( exc_info=True)
+        logging.error(exc_info=True)
     finally:
-     await bot.session.close()
-
+        await asyncio.gather(
+            bot1.session.close(),
+            bot2.session.close()
+        )
 
 if __name__ == '__main__':
     with contextlib.suppress(KeyboardInterrupt, SystemExit):
