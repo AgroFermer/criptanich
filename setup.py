@@ -3,6 +3,7 @@ import asyncio
 from aiogram.types import ChatJoinRequest, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Bot, Dispatcher, F
 import logging
+from aiogram.utils.markdown import hlink
 
 # Bot 1 configuration
 BOT1_TOKEN = '6650193766:AAEwpV6IxUDbd2EM9bt7_YnwW9RQwrtRnnw'
@@ -24,9 +25,11 @@ async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
 
 # Bot 2 logic
 async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
-    msg = f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+l9iBMS9szbRmMWRi"
-    button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+l9iBMS9szbRmMWRi', disable_web_page_preview=True)
-    markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
+    text = hlink('https://t.me/globalprofit', 'https://t.me/+YigHdJ6h1ck3YmQy')
+   msg= f"Дорогой друг, поздравляем тебя с приобретением подписки на закрытое сообщество PROFIT.\n\nВы можете войти в канал: {text}"
+   button = InlineKeyboardButton(text='ВСТУПИТЬ', url='https://t.me/+eWU1DCA0sEdhYjk6', disable_web_page_preview=True)   
+   markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
+
 
     await bot.send_message(chat_id=chat_join.from_user.id, text=msg, reply_markup=markup, disable_web_page_preview=True)
 
