@@ -1,7 +1,7 @@
 import contextlib
 import asyncio 
 from aiogram.types import ChatJoinRequest, InlineKeyboardButton, InlineKeyboardMarkup
-from aiogram import Bot, Dispatcher, F
+from aiogram import Bot, Dispatcher, types, F
 import logging
 
 # Bot 1 configuration
