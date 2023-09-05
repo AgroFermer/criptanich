@@ -24,7 +24,7 @@ async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
 
 # Bot 2 logic
 async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
-    msg = f"Ваша запит одобрений!\n\nВступити в канал: [Google](https://www.google.com)"
+    msg = f"Ваша запит одобрений!\n\nПривет мой <a href='http://www.example.com'>друг</a>"
     button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+4uMnS-VXsvg3M2Yy', disable_web_page_preview=True)
     markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
