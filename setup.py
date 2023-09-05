@@ -24,8 +24,8 @@ async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
 
 # Bot 2 logic
 async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
-    msg = f"Ваша запит одобрений!\n\nПривет мой <a href='http://www.example.com'>друг</a>"
-    button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+4uMnS-VXsvg3M2Yy', disable_web_page_preview=True)
+    msg = f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+l9iBMS9szbRmMWRi"
+    button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+l9iBMS9szbRmMWRi', disable_web_page_preview=True)
     markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
     await bot.send_message(chat_id=chat_join.from_user.id, text=msg, parse_mode="HTML", reply_markup=markup, disable_web_page_preview=True)
