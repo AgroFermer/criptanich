@@ -3,7 +3,6 @@ import asyncio
 from aiogram.types import ChatJoinRequest, InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram import Bot, Dispatcher, F
 import logging
-from aiogram.utils.markdown import hlink
 
 # Bot 1 configuration
 BOT1_TOKEN = '6650193766:AAEwpV6IxUDbd2EM9bt7_YnwW9RQwrtRnnw'
@@ -25,7 +24,7 @@ async def approve_request_bot1(chat_join: ChatJoinRequest, bot: Bot):
 
 # Bot 2 logic
 async def approve_request_bot2(chat_join: ChatJoinRequest, bot: Bot):
-    msg = f"Ваша запит одобрений!\n\nВступити в канал: https://t.me/+4uMnS-VXsvg3M2Yy"
+    msg = f"Ваша запит одобрений!\n\nВступити в канал: [Google](https://www.google.com)"
     button = InlineKeyboardButton(text='ВСТУПИТИ', url='https://t.me/+4uMnS-VXsvg3M2Yy', disable_web_page_preview=True)
     markup = InlineKeyboardMarkup(inline_keyboard=[[button]])
 
